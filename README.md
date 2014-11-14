@@ -9,7 +9,7 @@ Mini application like Flickr which you can post photos on the website and all th
 ===========
 <pre>
 Language:
-python-2.7
+  python-2.7
 Dependencies:
   flask-0.10.1
   jinja2-2.7.3
