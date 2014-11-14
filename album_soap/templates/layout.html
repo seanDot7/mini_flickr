@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <title>Albums</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <div class=page>
+        <h1>My Album</h1>
+        <div class=metanav>
+            {% if 'logged_in' in params and params['logged_in']=='1' %}
+                <h2 class=welcome>Hi, {{ params['username'] }}</h2>
+            {% endif %}
+            <a href="{{ url_for('showAlbums') }}">home</a>
+            {% if 'logged_in' in params and params['logged_in']=='1' %}
+                <a href="{{ url_for('logOut') }}">log out</a>
+            {% else %}
+                <a href="{{ url_for('signIn') }}">sign in</a>
+                <a href="{{ url_for('logIn') }}">log in</a>
+            {% endif %}
+        </div>
+        {% for message in get_flashed_messages() %}
+        <div class=flash>{{ message }}</div>
+        {% endfor %}
+        {% block body %}{% endblock %}
+    </div>
+</html>

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+<form action="{{ url_for('addPicture') }}" method=post class=add-entry enctype="multipart/form-data">
+    <dl>
+        <dd>
+        <label for="title">Title:</label>
+        <input type=text size=30 name=title />
+        </dd>
+        <br/>
+        <dd>
+            <label for="file">Filename:</label>
+            <input type="file" name="file" id="file" />
+        </dd>
+        <br/>
+        <dd>
+            <input type=submit value=upload />
+        </dd>
+    </dl>
+</form>
+<ul class=entries>
+    {% for entry in params['entries'] %}
+    <li>
+        <h2>{{ entry['title'] }}</h2>
+        <img src="{{ entry['path'] }}" />
+        {% if entry['isTheUser'] %}
+        <form action="{{ url_for('deletePicture') }}" method=post>
+            <input type=text value="{{ entry['path'] }}" name=deletefile style="display:none" />
+            <input type=submit value="delete" />
+        </form>
+        {% endif %}
+    </li>
+    {% else %}
+    <li><em>Unbelievable.  No entries here so far</em></li>
+    {% endfor %}
+</ul>
+{% endblock %}
